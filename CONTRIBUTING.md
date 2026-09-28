@@ -31,7 +31,7 @@ Projects that *use* Jev (routers, SDKs, agents, games, integrations) belong in *
 | ⚡ System One & Jev | TypeSafe's own pages, SDKs, essays and the launch discussion |
 | 🧪 Open Source | open weights or code that rebuild the System One shape |
 | 🔧 Built with Jev | software that calls Jev: routers, agents, games, integrations |
-| 📊 Independent Evaluations | any published test of Jev, with its headline number |
+| 📊 Benchmark & Leaderboard | any published benchmark, leaderboard or test of Jev, with its headline number |
 | 📰 Commentary & Analysis | reporting and analysis that checks the claims against the evidence |
 | 🧬 The Shape Before Jev | earlier work with the same input and output shape |
 | 🧱 What Jev Is Sold Against | the incumbents TypeSafe or the launch discussion named |

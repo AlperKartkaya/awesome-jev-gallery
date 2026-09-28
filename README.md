@@ -8,12 +8,12 @@
 
 [![Website](https://img.shields.io/badge/website-omnijev.github.io-2F80ED?style=flat-square&logo=githubpages&logoColor=white)](https://omnijev.github.io/awesome-jev-gallery/)
 
-![Entries](https://img.shields.io/badge/entries-146-8A2BE2?style=flat-square&logo=bookstack&logoColor=white)
-![Papers](https://img.shields.io/badge/papers-22-B31B1B?style=flat-square&logo=arxiv&logoColor=white)
+![Entries](https://img.shields.io/badge/entries-157-8A2BE2?style=flat-square&logo=bookstack&logoColor=white)
+![Papers](https://img.shields.io/badge/papers-24-B31B1B?style=flat-square&logo=arxiv&logoColor=white)
 ![Open source](https://img.shields.io/badge/open%20source-43-0EA5E9?style=flat-square&logo=huggingface&logoColor=white)
-![Jev evals](https://img.shields.io/badge/Jev%20evals-23-F0545C?style=flat-square&logo=speedtest&logoColor=white)
-![With code](https://img.shields.io/badge/with%20code-107-181717?style=flat-square&logo=github&logoColor=white)
-![Daily Papers](https://img.shields.io/badge/%F0%9F%A4%97%20daily%20papers-19-FFD21E?style=flat-square)
+![Benchmarks](https://img.shields.io/badge/benchmarks-34-F0545C?style=flat-square&logo=speedtest&logoColor=white)
+![With code](https://img.shields.io/badge/with%20code-115-181717?style=flat-square&logo=github&logoColor=white)
+![Daily Papers](https://img.shields.io/badge/%F0%9F%A4%97%20daily%20papers-20-FFD21E?style=flat-square)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0-10B981?style=flat-square&logo=creativecommons&logoColor=white)](LICENSE)
 
 ⚡ System One & Jev · 🧪 Open Source · 📊 Evaluations · 📰 Commentary · 🧬 Lineage
@@ -28,22 +28,24 @@
 - [⚡ System One & Jev](#-system-one--jev) (8)
 - [🧪 Open Source](#-open-source) (43)
 - [🔧 Built with Jev](#-built-with-jev) (35)
-- [📊 Independent Evaluations](#-independent-evaluations) (24)
+- [📊 Benchmark & Leaderboard](#-benchmark--leaderboard) (35)
 - [📰 Commentary & Analysis](#-commentary--analysis) (7)
 - [🧬 The Shape Before Jev](#-the-shape-before-jev) (15)
 - [🧱 What Jev Is Sold Against](#-what-jev-is-sold-against) (9)
 - [🧠 Where the Name Comes From](#-where-the-name-comes-from) (5)
-- [🔗 Related Lists](#-related-lists) (2)
+- [🔗 Related Lists](#-related-lists) (3)
 
 ---
 
 ## 🔥 News
 
+🆕 **2026-09-29 · Benchmarks.** Independent Evaluations is now Benchmark & Leaderboard, with 11 additions led by the Jev Decision Index leaderboard, Jev Arena, DecisionBench and jev-bench. Research papers on Jev now have their own list, Awesome JEV Papers, linked under Related Lists.
+
 🆕 **2026-09-22 · Ecosystem refresh.** 14 additions: local and multimodal decision models, Android chat assistance, robot and game demos, calibration tools and comparative evaluations. All 14 have gallery cards; two older entries returning 404 were removed. [Reviewed sources and scope](updates/2026-09-22.md).
 
-🚀 **2026-09 · Collection status.** 146 entries in 8 sections. PRs welcome.
+🚀 **2026-09 · Collection status.** 157 entries in 8 sections. PRs welcome.
 
-🧪 **2026-09 · Open source and evaluations.** 43 open models and codebases rebuild the System One shape, and 23 independent evaluations of Jev are collected under Independent Evaluations.
+🧪 **2026-09 · Open source and evaluations.** 43 open models and codebases rebuild the System One shape, and 34 benchmarks and evaluations of Jev are collected under Benchmark & Leaderboard.
 
 ---
 
@@ -154,10 +156,21 @@ Open, licensed software that puts Jev inside something that runs: routers, agent
 
 ---
 
-## 📊 Independent Evaluations
+## 📊 Benchmark & Leaderboard
 
-Every independent test of Jev published so far, with the headline number where the source gives one. TypeSafe's own dashboard is listed and marked official.
+Benchmarks, leaderboards and independent tests of Jev, with the headline number where the source gives one. TypeSafe's own dashboard is listed and marked official.
 
+- [Jev Decision Index](https://huggingface.co/spaces/multimodalart/jev-decision-index), Leaderboard that runs Jev and 70 open reproductions on the same suite of 43 benchmarks, about 120,000 decisions per model, chance-corrected so 0 means guessing; a separate kit reruns every entrant. [![Space](https://img.shields.io/badge/%F0%9F%A4%97%20Space-FFD21E?style=flat-square)](https://huggingface.co/spaces/multimodalart/jev-decision-index) [![Code](https://img.shields.io/github/stars/apolinario/decision-index?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/apolinario/decision-index)
+- [Jev Arena](https://github.com/NanmiCoder/jev-arena), Same 10,000 comments labelled by Jev 1.13 and DeepSeek Flash and checked against a full GPT-6 Astra review: 203 s against 824 s, $0.84 against $1.50, relevance accuracy 94.7% against 96.3%. [![Code](https://img.shields.io/github/stars/NanmiCoder/jev-arena?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/NanmiCoder/jev-arena) [![Website](https://img.shields.io/badge/Website-2EA44F?style=flat-square&logo=googlechrome&logoColor=white)](https://nanmicoder.github.io/jev-arena/)
+- [Laya vs Jev arena (Prompt Engineer 48)](https://github.com/PromptEngineer48/laya-vs-jev-arena), Local Laya and hosted Jev race in Snake and fight in a Mortal-Kombat-style arena, every move a real model decision, from a YouTube video. [![Code](https://img.shields.io/github/stars/PromptEngineer48/laya-vs-jev-arena?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/PromptEngineer48/laya-vs-jev-arena)
+- [jev-rag-benchmark](https://github.com/erendikmenn/jev-rag-benchmark), Locked benchmark of 1,044 Turkish XQuAD questions testing whether a Jev rerank improves a small RAG system on quality, latency and cost. [![Code](https://img.shields.io/github/stars/erendikmenn/jev-rag-benchmark?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/erendikmenn/jev-rag-benchmark)
+- [JevPokerBench](https://github.com/Prophetlab/JevPokerBench), Texas Hold'em benchmark for decision models with separate cash-game and sit-and-go leaderboards, hand replays and bring-your-own-agent tables; chips are virtual. [![Code](https://img.shields.io/github/stars/Prophetlab/JevPokerBench?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/Prophetlab/JevPokerBench)
+- [jev-search-rerank-eval](https://github.com/zhuyansen/jev-search-rerank-eval), Jev score rerank against keyword, BM25 and embedding search on 9,831 graded pairs from 164 Chinese and English queries, NDCG@10 with bootstrap intervals and the judge bias measured. [![Code](https://img.shields.io/github/stars/zhuyansen/jev-search-rerank-eval?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/zhuyansen/jev-search-rerank-eval)
+- [DecisionBench](https://huggingface.co/datasets/akhilaaa3/decision-bench), Typed-decision question set in medium and hard splits; the dataset card scores Jev 1.13 next to frontier LLMs. [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-06B6D4?style=flat-square)](https://huggingface.co/datasets/akhilaaa3/decision-bench)
+- [jev-bench](https://huggingface.co/datasets/Praveenrajus/jev-bench), 166,054 human-labelled rows in 22 configs recast as System One questions, keeping human label distributions where they exist; 43 models scored on 22,773 test records. [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-06B6D4?style=flat-square)](https://huggingface.co/datasets/Praveenrajus/jev-bench) [![Code](https://img.shields.io/github/stars/uspraveen/Jevify?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/uspraveen/Jevify)
+- [Laya vs Jev (Luni)](https://huggingface.co/datasets/Luni/laya-jev-benchmark), Laya and Jev run on the benchmarks where Jev has published numbers, on one RTX 5090, after showing that Laya's headline comparison used two different benchmarks. [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-06B6D4?style=flat-square)](https://huggingface.co/datasets/Luni/laya-jev-benchmark)
+- [JevAdvBench](https://arxiv.org/abs/2609.31142), "JevAdvBench: A Benchmark and Black-Box Attacks for Reinforcement Learning for Calibrated Decisions Models". Measures how far manipulated inputs move Jev's typed answers, since a typed model returns a well-formed answer even under attack. ![arXiv](https://img.shields.io/badge/arXiv-2609.31142-B31B1B?style=flat-square) [![Website](https://img.shields.io/badge/Website-2EA44F?style=flat-square&logo=googlechrome&logoColor=white)](https://JevAdvBench.github.io/JevAdvBench/)
+- [Just Ask Jev](https://arxiv.org/abs/2609.29429), "Just Ask Jev: Reinforcement Learning for Calibrated Decisions as a Zero-Shot Detector of AI Alignment Failures". 44 alignment-failure detection benchmarks that test Jev as a zero-shot detector, many questions per input in one call. ![arXiv](https://img.shields.io/badge/arXiv-2609.29429-B31B1B?style=flat-square) [![Code](https://img.shields.io/github/stars/sumleo/RLCDAlignBench?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/sumleo/RLCDAlignBench) [![Daily Papers](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhuggingface.co%2Fapi%2Fpapers%2F2609.29429&query=%24.upvotes&label=%F0%9F%A4%97%20Daily&color=FFD21E&style=flat-square)](https://huggingface.co/papers/2609.29429)
 - [DeepSearcher search-stopping evaluation](https://github.com/zilliztech/deep-searcher/blob/master/evaluation/jev_stopping/README.md), Jev and a DeepSeek stopping baseline both reach 93.25% supporting-document Recall@5 on 100 sampled 2WikiMultiHopQA queries, replayed over shared seven-round search trajectories; includes reproduction code and archived results.
 - [JevBench](https://github.com/fstandhartinger/jevbench), 534-decision benchmark with public task results and a v1.3 composite over intelligence, calibration, speed and cost; Jev scores 74.4, with assumed latency adjustments for self-hosted endpoints disclosed. [![Code](https://img.shields.io/github/stars/fstandhartinger/jevbench?style=flat-square&logo=github&label=Code&color=181717)](https://github.com/fstandhartinger/jevbench) [![Website](https://img.shields.io/badge/Website-2EA44F?style=flat-square&logo=googlechrome&logoColor=white)](https://benchmarkheaven.com/jev-models)
 - [MemSearch reranking evaluation](https://github.com/zilliztech/memsearch/blob/main/evaluation/reranking-evaluation.md), Jev reaches 79.41% Recall@5 versus 81.87% for Voyage rerank-3 over 4,344 Chinese/English query variants with fixed candidates; the memory corpus requires an authorized copy.
@@ -251,8 +264,9 @@ System 1 in Kahneman's sense, the bitter lesson TypeSafe argues with, and the Je
 
 ## 🔗 Related Lists
 
-The two sibling lists.
+The sibling lists.
 
+- [Awesome JEV Papers](https://github.com/OmniJev/awesome-jev-papers), Sibling list, research papers on Jev and System One decision models only. [![List](https://img.shields.io/github/stars/OmniJev/awesome-jev-papers?style=flat-square&logo=github&label=List&color=181717)](https://github.com/OmniJev/awesome-jev-papers)
 - [Awesome AI Scientist](https://github.com/Omni-Scientist/Awesome-AI-Scientist), Sibling list, AI systems that do science. [![List](https://img.shields.io/github/stars/Omni-Scientist/Awesome-AI-Scientist?style=flat-square&logo=github&label=List&color=181717)](https://github.com/Omni-Scientist/Awesome-AI-Scientist)
 - [Awesome RSI](https://github.com/Omni-Scientist/Awesome-RSI), Sibling list, systems whose improvement loop modifies itself. [![List](https://img.shields.io/github/stars/Omni-Scientist/Awesome-RSI?style=flat-square&logo=github&label=List&color=181717)](https://github.com/Omni-Scientist/Awesome-RSI)
 

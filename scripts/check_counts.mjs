@@ -20,7 +20,7 @@ import {readFileSync} from 'node:fs';
 
 const LISTS = 'Related Lists';
 const OPEN_SOURCE = 'Open Source';
-const EVALUATIONS = 'Independent Evaluations';
+const EVALUATIONS = 'Benchmark & Leaderboard';
 const SKIP = ['Contents', 'Contributing', 'Footnotes'];
 
 // A leading star used to mark the entries to read first, so allow one here.
@@ -73,7 +73,7 @@ const BADGES = [
 	['entries', /badge\/entries-(\d+)-/],
 	['papers', /badge\/papers-(\d+)-/],
 	['open source', /badge\/open%20source-(\d+)-/],
-	['Jev evals', /badge\/Jev%20evals-(\d+)-/],
+	['Jev evals', /badge\/benchmarks-(\d+)-/],
 	['with code', /badge\/with%20code-(\d+)-/],
 	['daily papers', /badge\/%F0%9F%A4%97%20daily%20papers-(\d+)-/],
 ];
@@ -97,7 +97,7 @@ const launch = text.match(/(\d+) entries in \d+ sections/);
 if (launch) compare('news entries', launch[1], derived.entries);
 const models = text.match(/(\d+) open models and codebases/);
 if (models) compare('news open models', models[1], derived['open source']);
-const evals = text.match(/(\d+) independent evaluations of Jev/);
+const evals = text.match(/(\d+) benchmarks and evaluations of Jev/);
 if (evals) compare('news Jev evals', evals[1], derived['Jev evals']);
 
 const width = Math.max(...rows.map(([what]) => what.length));
