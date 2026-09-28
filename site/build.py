@@ -3,8 +3,8 @@
 
     python3 site/build.py            -> site/dist/ (index.html, assets/)
 
-entries.json holds the entries that have a picture (one card each), sections.json the section
-labels and hues, tiles/ the 16:10 pictures, avatars/ the owners' GitHub avatars. Star counts are
+entries.json holds the entries that have a picture (one card each), blurbs.json the one-line
+description each card shows (keyed by slug), sections.json the section labels and hues, tiles/ the 16:10 pictures, avatars/ the owners' GitHub avatars. Star counts are
 read from the GitHub API at build time (GITHUB_TOKEN or GH_TOKEN raises the rate limit; without one
 the anonymous limit of 60 requests an hour still covers a build) and the footer says when. The
 GitHub Actions workflow in .github/workflows/site.yml runs this daily and on every push to main.
@@ -85,6 +85,11 @@ def build():
     entries = json.load(open(os.path.join(HERE, "entries.json"), encoding="utf-8"))
     sections = json.load(open(os.path.join(HERE, "sections.json"), encoding="utf-8"))
     meta = json.load(open(os.path.join(HERE, "meta.json"), encoding="utf-8"))
+    blurbs = json.load(open(os.path.join(HERE, "blurbs.json"), encoding="utf-8"))
+    for e in entries:
+        e["blurb"] = blurbs.get(e["slug"])
+        if not e["blurb"]:
+            print(f"  no blurb for {e['slug']}, the card shows its long description")
     fresh = live_stars(sorted({e["repo"] for e in entries if e.get("repo")}))
     for e in entries:
         if e.get("repo") and fresh.get(e["repo"]) is not None:
