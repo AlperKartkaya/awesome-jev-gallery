@@ -17,22 +17,36 @@ OUT = os.path.join(HERE, "dist")
 REPO = "https://github.com/OmniJev/awesome-jev-gallery"
 SITE = "https://omnijev.github.io/awesome-jev-gallery/"
 TAGLINE = "Papers, open models and evaluations behind System One models and Jev."
-FONTS = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700"
-         "&family=Chakra+Petch:wght@500;600;700&display=swap")
-BRAND = ('<svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true">'
-         '<rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="#2F80ED"/>'
-         '<path d="M17.8 5.5 9.5 18h6l-1.3 8.5L22.5 14h-6z" fill="#fff"/></svg>')
-I_GH = ('<svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">'
-        '<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-'
-        '.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.'
-        '63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.'
-        '64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27'
-        ' 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27'
-        '.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15'
-        '.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>')
-I_MOON = ('<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" '
-          'stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">'
-          '<path d="M13.5 9.6A6 6 0 0 1 6.4 2.5a6 6 0 1 0 7.1 7.1Z"/></svg>')
+FONTS = ("DepartureMono-Regular.otf", "PressStart2P-Regular.ttf")
+# the Awesome JEV mark: a pixel bolt on the same 16-wide monitor as the OneJev eye
+LOGO = ["################",
+        "#..............#",
+        "#.......pmm....#",
+        "#......pmm.....#",
+        "#.....pmm......#",
+        "#....pmmmmm....#",
+        "#.......pmm....#",
+        "#......pmm.....#",
+        "#.....mm.......#",
+        "#....m.........#",
+        "#..............#",
+        "################",
+        "......####......"]
+LOGO_INK = {"m": "#d45bb6", "p": "#f386a1"}
+
+
+def logo(animate=False):
+    """The mark as inline SVG; the frame takes currentColor, animate=True draws the bolt pixel by pixel."""
+    sq = lambda x, y: f"M{x} {y}h1v1h-1z"
+    frame = "".join(sq(x, y) for y, r in enumerate(LOGO) for x, ch in enumerate(r) if ch == "#")
+    bolt = [(x, y, ch) for y, r in enumerate(LOGO) for x, ch in enumerate(r) if ch in LOGO_INK]
+    if animate:
+        inner = "".join(f'<rect x="{x}" y="{y}" width="1" height="1" fill="{LOGO_INK[ch]}" style="--d:{i}"/>'
+                        for i, (x, y, ch) in enumerate(bolt))
+    else:
+        inner = "".join(f'<path fill="{c}" d="{"".join(sq(x, y) for x, y, ch in bolt if ch == k)}"/>' for k, c in LOGO_INK.items())
+    return (f'<svg class="px" viewBox="0 0 16 13" aria-hidden="true"><path fill="currentColor" d="{frame}"/>'
+            f'{inner}</svg>')
 
 
 def esc(s):
@@ -89,6 +103,7 @@ def build():
         shutil.copytree(os.path.join(HERE, d), os.path.join(OUT, "assets", d))
     for f in ("gallery.css", "gallery.js", "favicon.svg", "og.png"):
         shutil.copy(os.path.join(HERE, f), os.path.join(OUT, "assets", f))
+    shutil.copytree(os.path.join(HERE, "fonts"), os.path.join(OUT, "assets", "fonts"))
     hues = ("\n:root{" + "".join(f"--s-{s['key']}:{s['hue'][0]};" for s in sections) + "}"
             "\n:root[data-theme=\"dark\"]{" + "".join(f"--s-{s['key']}:{s['hue'][1]};" for s in sections) + "}\n")
     with open(os.path.join(OUT, "assets", "gallery.css"), "a", encoding="utf-8") as f:
@@ -97,34 +112,50 @@ def build():
     n_readme = meta["readme_entries"]
     built = datetime.datetime.now(datetime.timezone.utc)
     data = {"built": built.isoformat(timespec="minutes"), "sections": sections, "entries": entries}
-    pills = ('<button class="pill on" data-sec="">All <span>%d</span></button>' % len(entries)) + "".join(
-        f'<button class="pill" data-sec="{s["key"]}" style="--sc:var(--s-{s["key"]})"><i></i>{esc(s["chip"])} <span>{s["n"]}</span></button>'
-        for s in sections)
-    body = f"""<header>
-  <div class="bar">
-    <a class="brand" href="{SITE}">{BRAND}Awesome JEV <small id="count"></small></a>
-    <input type="search" id="q" placeholder="Search  (press /)" aria-label="Search">
-    <div class="grp"><label>Sort</label>
-      <select id="sort"><option value="curated">Curated</option><option value="stars">Stars</option><option value="newest">Newest</option><option value="random">Random</option></select>
-      <button id="reshuffle" title="Shuffle again" style="display:none">🎲</button>
-    </div>
-    <div class="grp cols"><label>Per row</label><button id="colDec">−</button><span id="colN">4</span><button id="colInc">+</button></div>
-    <div class="spacer"></div>
-    <a class="chip" href="{REPO}#readme" target="_blank" rel="noopener">Full list, {n_readme} entries ↗</a>
-    <button class="icon" id="theme" type="button" aria-label="Switch colour theme">{I_MOON}</button>
-    <a class="icon" href="{REPO}" target="_blank" rel="noopener" aria-label="Repository on GitHub">{I_GH}</a>
-  </div>
+    pills = (f'<button type="button" data-sec="" aria-pressed="true">All <b>{len(entries)}</b></button>' + "".join(
+        f'<button type="button" data-sec="{s["key"]}" aria-pressed="false" style="--sc:var(--s-{s["key"]})"><i></i>{esc(s["chip"])} <b>{s["n"]}</b></button>'
+        for s in sections))
+    sorts = "".join(f'<button type="button" data-sort="{k}" aria-pressed="false">{k}</button>'
+                    for k in ("curated", "stars", "newest", "random"))
+    body = f"""<header class="top">
+  <a class="brand" href="{SITE}">{logo()}<span class="w">Awesome JEV</span></a>
+  <nav><a href="{REPO}#readme" target="_blank" rel="noopener">Full list</a><button id="theme" type="button" aria-label="Switch colour theme">Dark</button><a class="hot" href="{REPO}" target="_blank" rel="noopener">GitHub</a></nav>
 </header>
-<div class="intro"><h1>Awesome JEV</h1><p>{esc(TAGLINE)} Every card opens its source; the full list of {n_readme} entries is in the <a href="{REPO}#readme">README</a>.</p>
-<div class="pills" id="pills">{pills}</div></div>
-<main><div id="grid"></div><div class="empty" id="empty" hidden>Nothing matches.</div></main>
-<footer>{meta["readme_line"]} Curated at <a href="{REPO}">OmniJev/awesome-jev-gallery</a>, CC BY 4.0. Star counts read from GitHub when the page was built, {built:%d %B %Y %H:%M} UTC.</footer>
+<section class="wrap banner">
+  <div class="logo">{logo(animate=True)}</div>
+  <div>
+    <h1>Awesome JEV</h1>
+    <p class="sub" id="sub">{esc(TAGLINE)}</p>
+    <p class="meta">Every card opens its source <b>&gt;</b> the <a href="{REPO}#readme">README</a> holds the full list of {n_readme} entries.</p>
+  </div>
+</section>
+<div class="wrap controls">
+  <div class="tabs" id="pills">{pills}</div>
+  <div class="tools">
+    <label class="search"><span>find</span><input type="search" id="q" placeholder="press /" aria-label="Search"></label>
+    <div class="grp"><span>sort</span><div class="tabs" id="sort">{sorts}</div></div>
+    <div class="grp cols"><span>per row</span><button id="colDec" type="button" aria-label="Fewer per row">-</button><b id="colN">3</b><button id="colInc" type="button" aria-label="More per row">+</button></div>
+    <span class="count" id="count"></span>
+  </div>
+</div>
+<main class="wrap"><div id="grid"></div><div class="empty" id="empty" hidden>Nothing matches.</div></main>
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">{logo()}</div>
+    <div class="fwin">
+      <div class="win-t"><span class="t">awesome-jev.txt</span></div>
+      <div class="win-b">{meta["readme_line"]}<br>Curated at <a href="{REPO}">OmniJev/awesome-jev-gallery</a>, CC BY 4.0.<br>Star counts read from GitHub on {built:%d %B %Y}, {built:%H:%M} UTC.</div>
+    </div>
+  </div>
+</footer>
 <script id="data" type="application/json">{json.dumps(data, ensure_ascii=False).replace("</", "<\\/")}</script>"""
 
     desc = (f"System One models and typed decisions: {n_readme} papers, open-source rebuilds, independent "
             "evaluations and software built on Jev, each card with a picture of what is behind the link.")
     ld = json.dumps({"@context": "https://schema.org", "@type": "CollectionPage", "name": "Awesome JEV",
                      "description": desc, "url": SITE, "isPartOf": {"@type": "WebSite", "name": "Awesome JEV", "url": SITE}})
+    preload = "\n".join(f'<link rel="preload" href="assets/fonts/{f}" as="font" type="font/{f.rsplit(".", 1)[1]}" crossorigin>'
+                        for f in FONTS)
     page = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -141,11 +172,9 @@ def build():
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{SITE}assets/og.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1e1e1e">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS}">
+{preload}
 <link rel="stylesheet" href="assets/gallery.css">
 <script type="application/ld+json">{ld}</script>
 </head>
