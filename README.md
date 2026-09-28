@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/cover-pixel.png" alt="Awesome JEV in pixel style: the bolt logo, the title, and ten windows from the gallery such as PlayJev, OneJev, jevmeter and pg-jev" width="100%">
+<img src="assets/teaser.png" alt="Awesome JEV in pixel style: the bolt logo, the title, and ten windows from the gallery such as PlayJev, OneJev, jevmeter and pg-jev" width="100%">
 
 # Awesome JEV [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
